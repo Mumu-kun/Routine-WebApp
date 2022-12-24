@@ -261,6 +261,32 @@ const exchangeBlocks = (initial, final) => {
 		return;
 	}
 
+	let netSize = 0;
+	let maxSize = Math.max(parseInt(initial.dataset.span), parseInt(final.dataset.span));
+	for (let i = 0; i < maxSize; i++) {
+		const classBlockI = document.getElementById(`block--${initialCell.row}-${initialCell.col + 7 + i}`);
+		const classBlockF = document.getElementById(`block--${finalCell.row}-${finalCell.col + 7 + i}`);
+
+		if (classBlockI) {
+			if (classBlockI != final) {
+				netSize += parseInt(classBlockI.dataset.span);
+			} else {
+				netSize += Math.min(parseInt(final.dataset.span), maxSize - i);
+			}
+		}
+		if (classBlockF) {
+			if (classBlockF != initial) {
+				netSize -= parseInt(classBlockF.dataset.span);
+			} else {
+				netSize -= Math.min(parseInt(initial.dataset.span), maxSize - i);
+			}
+		}
+		console.log(classBlockI, classBlockF, netSize);
+	}
+	if (netSize != 0) {
+		return;
+	}
+
 	for (let i = 0; i < Math.max(parseInt(initial.dataset.span), parseInt(final.dataset.span)); i++) {
 		const classBlockI = document.getElementById(`block--${initialCell.row}-${initialCell.col + 7 + i}`);
 		const classBlockF = document.getElementById(`block--${finalCell.row}-${finalCell.col + 7 + i}`);
