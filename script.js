@@ -225,7 +225,6 @@ container.addEventListener('mouseup', (event) => {
 		exchangeBlocks(document.getElementById(tempBlock.dataset.srcBlockId), event.target);
 	}
 
-	// document.body.removeChild(tempBlock);
 	tempBlock.style.opacity = 0;
 	tempBlockInserted = false;
 
